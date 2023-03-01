@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 341119997}
   - component: {fileID: 341120000}
   - component: {fileID: 341120001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: suelo prueba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +416,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1474797060}
-  - component: {fileID: 1474797059}
   m_Layer: 0
   m_Name: GroundPoint
   m_TagString: Untagged
@@ -424,32 +423,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &1474797059
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1474797058}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!4 &1474797060
 Transform:
   m_ObjectHideFlags: 0
@@ -577,6 +550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1967931549}
   - component: {fileID: 1967931548}
+  - component: {fileID: 1967931554}
   - component: {fileID: 1967931552}
   - component: {fileID: 1967931550}
   - component: {fileID: 1967931553}
@@ -683,17 +657,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967931547}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 693061e6a2a4e7344a88c5f06dab967b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
   jumpForce: 10
-  groundCheckPoint: {fileID: 1474797060}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!70 &1967931553
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -710,3 +680,33 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.3}
   m_Size: {x: 1.6, y: 2.88}
   m_Direction: 0
+--- !u!114 &1967931554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967931547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a784a31bc469c43af74599184418cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ySpeed: 0
+  yStart: 10
+  duringJump: 0
+  isGrounded: 0
+  hasJumpEnded: 1
+  jumpMaxSpeed: 25
+  jumpAccel: 0.01
+  jumpTimer: 0
+  jumpTimerLimit: 0.3
+  jumpDeaccel: 0.04
+  fallAccel: 0.02
+  fallMaxSpeed: -25
+  speed: {x: 0, y: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  theRB: {fileID: 1967931550}
+  groundCheckPoint: {fileID: 1474797060}
