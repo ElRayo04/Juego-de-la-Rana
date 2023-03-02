@@ -10,6 +10,9 @@ public class PlayerControllerEdu : MonoBehaviour
     //[SerializeField] float runAccel; //Cuanto tarda en llegar al máximo de velocidad
     //[SerializeField] float runDeaccel; //Cuanto tarda en frenar al soltar las teclas
 
+    //Velocidad del jugador
+    public float moveSpeed;
+
     //Movimiento vertical
 
 
@@ -46,6 +49,9 @@ public class PlayerControllerEdu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //
+        theRB.velocity = new Vector2(moveSpeed * Input.GetAxis("Horizontal"), theRB.velocity.y);
+
         if (hasJumpEnded)
         {
             isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, 0.2f, whatIsGround);
