@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LengthenTongue : MonoBehaviour
 {
-   
+    public float tonguespeed = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -15,12 +15,25 @@ public class LengthenTongue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode. E))
+        {
+            // Ponemos la animacion de lanzar al lengua
+
+            if ()
+            {
+
+            }
+        }
     }
 
     //Metodo para Lanzar la lengua 
-    public void lanzarLaLengua(GameObject tongue, float tongueVelocity)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        transform.position = Vector3.MoveTowards(transform.position,);
 
     }
+    //public void lanzarLaLengua(GameObject tongue, float tongueVelocity)
+    //{
+
+    //}
 }
