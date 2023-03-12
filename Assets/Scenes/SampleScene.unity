@@ -581,6 +581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1490274281}
   - component: {fileID: 1490274280}
+  - component: {fileID: 1490274283}
   - component: {fileID: 1490274279}
   - component: {fileID: 1490274282}
   m_Layer: 0
@@ -693,6 +694,24 @@ CapsuleCollider2D:
   m_Offset: {x: -2.75, y: 0.01}
   m_Size: {x: 1.08, y: 0.4}
   m_Direction: 1
+--- !u!114 &1490274283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490274276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace8be3fc3bcc35419c984b69f774198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tongueOut: 0
+  tongueOutTime: 0
+  limitTongueOutTime: 0.25
+  frogGoingToTargetSpeed: 45
+  anim: {fileID: 0}
+  frogTransform: {fileID: 1967931549}
 --- !u!1 &1653355274
 GameObject:
   m_ObjectHideFlags: 0

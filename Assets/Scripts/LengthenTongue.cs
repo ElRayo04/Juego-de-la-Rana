@@ -19,7 +19,7 @@ public class LengthenTongue : MonoBehaviour
         {
             // Ponemos la animacion de lanzar al lengua
 
-            if ()
+            //if ()
             {
 
             }
@@ -27,9 +27,9 @@ public class LengthenTongue : MonoBehaviour
     }
 
     //Metodo para Lanzar la lengua 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void TongueOut()
     {
-        transform.position = Vector3.MoveTowards(transform.position,);
+        
 
     }
     //public void lanzarLaLengua(GameObject tongue, float tongueVelocity)
