@@ -14,8 +14,6 @@ public class PlayerControllerEdu : MonoBehaviour
     public float moveSpeed;
 
     //Movimiento vertical
-
-
     [SerializeField] float ySpeed; // Velocidad horizontal
     [SerializeField] float yStart; //Velocidad inicial con la que empieza el salto para que no tarde tanto en empezar a subir
 

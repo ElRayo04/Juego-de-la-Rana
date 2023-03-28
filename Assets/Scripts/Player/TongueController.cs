@@ -53,6 +53,8 @@ public class TongueController : MonoBehaviour
             float frogStep = frogGoingToTargetSpeed * Time.deltaTime;
 
             frogTransform.position = Vector2.MoveTowards(frogTransform.position, collision.transform.position, frogStep);
+
+            //Que se fezee el collider 
         }
     }
 
