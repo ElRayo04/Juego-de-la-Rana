@@ -12,6 +12,8 @@ public class TongueController : MonoBehaviour
     public float limitTongueOutTime;
     public float frogGoingToTargetSpeed;
 
+    public bool goingToTheEnemy;
+
     //Referencias
     public Animator anim;
     public Transform frogTransform;
@@ -40,8 +42,7 @@ public class TongueController : MonoBehaviour
                 tongueOut = false;
                 tongueOutTime = 0;
             }
-        }
-        
+        }        
 
         anim.SetBool("Tongue_Out", tongueOut);
     }
@@ -50,11 +51,21 @@ public class TongueController : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
-            float frogStep = frogGoingToTargetSpeed * Time.deltaTime;
+            goingToTheEnemy = true;
 
-            frogTransform.position = Vector2.MoveTowards(frogTransform.position, collision.transform.position, frogStep);
+            if(goingToTheEnemy ==true)
+            {
+                //Multiplicamos la velocidad por Time.deltaTime para que vaya igual en todos los ordenadores
+                float frogStep = frogGoingToTargetSpeed * Time.deltaTime;
 
-            //Que se fezee el collider 
+                frogTransform.position = Vector2.MoveTowards(frogTransform.position, collision.transform.position, frogStep);
+            }
+            if (Vector3.Distance(collision.transform.position, frogTransform.position) <0.1f)
+            {
+                goingToTheEnemy = false;
+            }
+
+            //Hacer un metodo para cuando este llendo al enemgio se ejecute el true. un metodo con el que se ejecute el MoveTowards
         }
     }
 
