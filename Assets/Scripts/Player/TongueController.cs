@@ -6,31 +6,41 @@ public class TongueController : MonoBehaviour
 {
     
     public bool tongueOut;
-    
-
     public float tongueOutTime;
     public float limitTongueOutTime;
-    public float frogGoingToTargetSpeed;
 
-    public bool goingToTheEnemy;
+    //REFERENCIAS
 
-    //Referencias
+    //al Sprite Renderer
+    private SpriteRenderer theSR;
+
     public Animator anim;
     public Transform frogTransform;
+    //Referencia al collider de la lengua
+    public Collider2D tongueCollider;
+
+    [SerializeField] PlayerControllerEdu player;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+
+        //Obtenemos el SpriteRenderer del jugador
+        theSR = GetComponent<SpriteRenderer>();
+        //Cambiamos el color del sprite, mantenemos el RGB y ponemos la opacidad al minimo
+        theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
+            //Cambiamos el color del sprite, mantenemos el RGB y ponemos la opacidad al minimo
+            theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 1f);
             tongueOut = true;
-            
+            tongueCollider.enabled = true;
         }
 
         if(tongueOut == true)
@@ -41,9 +51,11 @@ public class TongueController : MonoBehaviour
             {
                 tongueOut = false;
                 tongueOutTime = 0;
+                tongueCollider.enabled = false;
+                //Cambiamos el color del sprite, mantenemos el RGB y ponemos la opacidad al minimo
+                theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 0f);
             }
-        }        
-
+        }
         anim.SetBool("Tongue_Out", tongueOut);
     }
 
@@ -51,22 +63,15 @@ public class TongueController : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
-            goingToTheEnemy = true;
+            //Guardamos la posicion del enemigo --> variable que se actualiza cuando chocamos con un enemigo
+            player.positionEnemy = collision.transform.position;
+            player.goingToTheEnemy = true;
 
-            if(goingToTheEnemy ==true)
-            {
-                //Multiplicamos la velocidad por Time.deltaTime para que vaya igual en todos los ordenadores
-                float frogStep = frogGoingToTargetSpeed * Time.deltaTime;
-
-                frogTransform.position = Vector2.MoveTowards(frogTransform.position, collision.transform.position, frogStep);
-            }
-            if (Vector3.Distance(collision.transform.position, frogTransform.position) <0.1f)
-            {
-                goingToTheEnemy = false;
-            }
-
-            //Hacer un metodo para cuando este llendo al enemgio se ejecute el true. un metodo con el que se ejecute el MoveTowards
+          
         }
+        
     }
+
+    
 
 }

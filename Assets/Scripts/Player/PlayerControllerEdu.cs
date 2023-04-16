@@ -38,6 +38,21 @@ public class PlayerControllerEdu : MonoBehaviour
     [SerializeField] Transform groundCheckPoint;
 
 
+    //VARABLES PARA LA LENGUA
+
+    //Referencia al collider de la lengua
+    public Collider2D tongueCollider;
+
+    public Vector3 positionEnemy;
+    
+    public float frogGoingToTargetSpeed;
+
+    //Variable para saber si estamos llendo al enemigo con la lengua
+    public bool goingToTheEnemy;
+
+   
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,6 +99,21 @@ public class PlayerControllerEdu : MonoBehaviour
             ySpeed = Mathf.Lerp(ySpeed, fallMaxSpeed, fallAccel);
             theRB.velocity = new Vector2(theRB.velocity.x, ySpeed);
         }
+
+        //Llamamos al metodo para ir hacia la lengua
+        if (goingToTheEnemy == true)
+        {
+            MoveFrogTowards();
+
+            //Desactivamos el collider de la lengua
+            tongueCollider.enabled = false;  // .enable sirbe para desactivar componestes
+
+            if (Vector3.Distance(positionEnemy, this.gameObject.transform.position) < 0.3f) //this.gameObject hace referencia a el gameobject que lleve este Script
+            {
+                Debug.Log("AAAAAAAA me caigo");
+                goingToTheEnemy = false;                
+            }
+        }        
     }
 
     private void Startjump()
@@ -115,5 +145,14 @@ public class PlayerControllerEdu : MonoBehaviour
             if (ySpeed == 0) hasJumpEnded = true;
         }
         if (ySpeed > 0.2) theRB.velocity = new Vector2(theRB.velocity.x, ySpeed);
+    }
+
+    //Metodo para mover a la rana hacia su lengua
+    public void MoveFrogTowards()
+    {
+        //Multiplicamos la velocidad por Time.deltaTime para que vaya igual en todos los ordenadores
+        float frogStep = frogGoingToTargetSpeed * Time.deltaTime;
+
+        this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, positionEnemy, frogStep);
     }
 }
