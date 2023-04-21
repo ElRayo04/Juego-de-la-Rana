@@ -50,8 +50,16 @@ public class PlayerControllerEdu : MonoBehaviour
     //Variable para saber si estamos llendo al enemigo con la lengua
     public bool goingToTheEnemy;
 
-   
+    //Hacemos el Singleton de este script
+    public static PlayerControllerEdu sharedInstance;
 
+    private void Awake()
+    {
+        if (sharedInstance == null)
+        {
+            sharedInstance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -113,7 +121,25 @@ public class PlayerControllerEdu : MonoBehaviour
                 Debug.Log("AAAAAAAA me caigo");
                 goingToTheEnemy = false;                
             }
-        }        
+        }
+
+        //Girar el sprite del jugador según su dirección de movimiento
+        //Si el jugador se mueve hacia la izquierda
+        if (theRB.velocity.x < 0)
+        {
+            //No cambiamos la dirección del sprite
+            theSR.flipX = false;
+            //El jugador mira a la izquierda
+            isLeft = true;
+        }
+        //Si el jugador por el contrario se está moviendo hacia la derecha
+        else if (theRB.velocity.x > 0)
+        {
+            //Cambiamos la dirección del sprite
+            theSR.flipX = true;
+            //El jugador mira a la derecha
+            isLeft = false;
+        }
     }
 
     private void Startjump()
