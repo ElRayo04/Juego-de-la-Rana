@@ -20,7 +20,7 @@ public class DamagePlayer : MonoBehaviour
         //Comprobamos si es el jugador el que ha entrado en esa zona de trigger
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Hit");
+            //Debug.Log("Hit");
             //Buscará un objeto que tenga metido el script PlayerHealthController y realizará el método DealWithDamage
             //FindObjectOfType<PlayerHealthController>().DealWithDamage();
 

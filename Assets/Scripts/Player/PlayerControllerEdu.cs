@@ -50,6 +50,17 @@ public class PlayerControllerEdu : MonoBehaviour
     //Variable para saber si estamos llendo al enemigo con la lengua
     public bool goingToTheEnemy;
 
+
+    //VARIABLES PARA LA RANA
+
+    //Referencia al Animator del jugador
+    private Animator anim;
+    //Referencia al SpriteRenderer del jugador
+    private SpriteRenderer theSR;
+
+    //Variable para conocer hacia donde mira el jugador
+    public bool isLeft;
+
     //Hacemos el Singleton de este script
     public static PlayerControllerEdu sharedInstance;
 
@@ -121,12 +132,15 @@ public class PlayerControllerEdu : MonoBehaviour
                 Debug.Log("AAAAAAAA me caigo");
                 goingToTheEnemy = false;                
             }
+            Debug.Log("si 2dos cosita");
+            Debug.Log("si una cosita");
         }
 
         //Girar el sprite del jugador según su dirección de movimiento
         //Si el jugador se mueve hacia la izquierda
         if (theRB.velocity.x < 0)
         {
+            Debug.Log("si una cosita");
             //No cambiamos la dirección del sprite
             theSR.flipX = false;
             //El jugador mira a la izquierda
@@ -135,6 +149,7 @@ public class PlayerControllerEdu : MonoBehaviour
         //Si el jugador por el contrario se está moviendo hacia la derecha
         else if (theRB.velocity.x > 0)
         {
+            Debug.Log("si 2dos cosita");
             //Cambiamos la dirección del sprite
             theSR.flipX = true;
             //El jugador mira a la derecha
