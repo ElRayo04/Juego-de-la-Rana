@@ -38,6 +38,7 @@ public class LevelManager : MonoBehaviour
     {
         //Llamamos a la corrutina que respawnea al jugador
         StartCoroutine(RespawnPlayerCo());
+        Debug.Log("respaun");
     }
 
     //Corrutina para respawnear al jugador

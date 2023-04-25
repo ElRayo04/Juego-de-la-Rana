@@ -39,6 +39,7 @@ public class Checkpoint : MonoBehaviour
 
             //Le pasamos al CheckpointController la nueva posición de reaparición
             CheckpointController.sharedInstance.SetSpawnPoint(transform.position);
+            Debug.Log("posicion guardada");
         }
     }
 
