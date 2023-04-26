@@ -79,7 +79,7 @@ public class PlayerHealthController : MonoBehaviour
                 Instantiate(deathEffect, transform.position, transform.rotation);
 
                 //Llamamos al método que respawnea al jugador
-                sLevelManager.sharedInstance.RespawnPlayer();
+                LevelManager.sharedInstance.RespawnPlayer();
             }
             //Si el jugador ha recibido daño pero no ha muerto
             else

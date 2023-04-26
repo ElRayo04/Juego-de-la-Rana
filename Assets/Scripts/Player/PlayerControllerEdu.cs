@@ -75,7 +75,10 @@ public class PlayerControllerEdu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //Rellenamos las referencias        
+        theRB = GetComponent<Rigidbody2D>();        
+        anim = GetComponent<Animator>();        
+        theSR = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -138,7 +141,7 @@ public class PlayerControllerEdu : MonoBehaviour
 
         //Girar el sprite del jugador según su dirección de movimiento
         //Si el jugador se mueve hacia la izquierda
-        if (theRB.velocity.x < 0)
+        if (theRB.velocity.x > 0)
         {
             Debug.Log("si una cosita");
             //No cambiamos la dirección del sprite
@@ -147,7 +150,7 @@ public class PlayerControllerEdu : MonoBehaviour
             isLeft = true;
         }
         //Si el jugador por el contrario se está moviendo hacia la derecha
-        else if (theRB.velocity.x > 0)
+        else if (theRB.velocity.x < 0)
         {
             Debug.Log("si 2dos cosita");
             //Cambiamos la dirección del sprite
