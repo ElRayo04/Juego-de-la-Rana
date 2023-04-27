@@ -31,6 +31,7 @@ public class Pickup : MonoBehaviour
         {
             //El objeto ha sido recogido
             isCollected = true;
+            PlayerHealthController.sharedInstance.IncreaseMaxHealth();
             //Destruimos el Game Object
             Destroy(gameObject);
         }

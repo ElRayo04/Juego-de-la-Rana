@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHealthController : MonoBehaviour
 {
     //Variables para controlar la vida actual del jugador y el máximo de vida que puede tener
-    public int currentHealth, maxHealth;
+    public int currentHealth, maxHealth, maximunMaxHealth;
 
     //Variables para el contador de tiempo de invencibilidad
     public float invincibleLength; //Valor que tendrá el contador de tiempo
@@ -115,5 +115,24 @@ public class PlayerHealthController : MonoBehaviour
         }
         //Actualizamos la UI
         UIController.sharedInstance.UpdateHealthDisplay();
+    }
+
+    //Metodo para aumentar la vida maxima del jugador
+    public void IncreaseMaxHealth()
+    {
+        if(maxHealth < maximunMaxHealth)
+        {
+            //Aumentamos la vida maxima en 1
+            maxHealth++;
+            //Curamos toda la vida del jugador
+            currentHealth = maxHealth;
+        }
+        if (maxHealth == 4) UIController.sharedInstance.heart4.gameObject.SetActive(true);
+        else if(maxHealth == 5) UIController.sharedInstance.heart5.gameObject.SetActive(true);
+        else if (maxHealth == 6) UIController.sharedInstance.heart6.gameObject.SetActive(true);
+        //Actualizamos la UI
+        UIController.sharedInstance.UpdateHealthDisplay();
+
+
     }
 }

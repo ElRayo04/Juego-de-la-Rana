@@ -6,7 +6,7 @@ using UnityEngine.UI; //Para poder trabajar con elementos de la UI
 public class UIController : MonoBehaviour
 {
     //Referencias a las imágenes de los corazones de la UI
-    public Image heart1, heart2, heart3;
+    public Image heart1, heart2, heart3, heart4, heart5, heart6;
 
     //Referencias a los sprites que cambiarán al perder o ganar un corazón
     public Sprite heartFull, heartEmpty;
@@ -50,11 +50,41 @@ public class UIController : MonoBehaviour
         //Dependiendo del valor de la vida actual del jugador   
         switch (PlayerHealthController.sharedInstance.currentHealth)
         {
+            //En el caso en el que la vida actual valga 6
+            case 6:
+                heart1.sprite = heartFull;
+                heart2.sprite = heartFull;
+                heart3.sprite = heartFull;
+                heart4.sprite = heartFull;
+                heart5.sprite = heartFull;
+                heart6.sprite = heartFull;
+                break;
+            //En el caso en el que la vida actual valga 5
+            case 5:
+                heart1.sprite = heartFull;
+                heart2.sprite = heartFull;
+                heart3.sprite = heartFull;
+                heart4.sprite = heartFull;
+                heart5.sprite = heartFull;
+                heart6.sprite = heartEmpty;
+                break;
+            //En el caso en el que la vida actual valga 4
+            case 4:
+                heart1.sprite = heartFull;
+                heart2.sprite = heartFull;
+                heart3.sprite = heartFull;
+                heart4.sprite = heartFull;
+                heart5.sprite = heartEmpty;
+                heart6.sprite = heartEmpty;
+                break;
             //En el caso en el que la vida actual valga 3
             case 3:
                 heart1.sprite = heartFull;
                 heart2.sprite = heartFull;
                 heart3.sprite = heartFull;
+                heart4.sprite = heartEmpty;
+                heart5.sprite = heartEmpty;
+                heart6.sprite = heartEmpty;
                 //Cerramos el caso
                 break;
             //En el caso en el que la vida actual valga 2
@@ -62,6 +92,9 @@ public class UIController : MonoBehaviour
                 heart1.sprite = heartFull;
                 heart2.sprite = heartFull;
                 heart3.sprite = heartEmpty;
+                heart4.sprite = heartEmpty;
+                heart5.sprite = heartEmpty;
+                heart6.sprite = heartEmpty;
                 //Cerramos el caso
                 break;
             //En el caso en el que la vida actual valga 1
@@ -69,6 +102,9 @@ public class UIController : MonoBehaviour
                 heart1.sprite = heartFull;
                 heart2.sprite = heartEmpty;
                 heart3.sprite = heartEmpty;
+                heart4.sprite = heartEmpty;
+                heart5.sprite = heartEmpty;
+                heart6.sprite = heartEmpty;
                 //Cerramos el caso
                 break;
             //En el caso en el que la vida actual valga 0
@@ -76,6 +112,9 @@ public class UIController : MonoBehaviour
                 heart1.sprite = heartEmpty;
                 heart2.sprite = heartEmpty;
                 heart3.sprite = heartEmpty;
+                heart4.sprite = heartEmpty;
+                heart5.sprite = heartEmpty;
+                heart6.sprite = heartEmpty;
                 //Cerramos el caso
                 break;
             //En el caso por defecto, el jugador estará muerto
@@ -83,6 +122,9 @@ public class UIController : MonoBehaviour
                 heart1.sprite = heartEmpty;
                 heart2.sprite = heartEmpty;
                 heart3.sprite = heartEmpty;
+                heart4.sprite = heartEmpty;
+                heart5.sprite = heartEmpty;
+                heart6.sprite = heartEmpty;
                 //Cerramos el caso
                 break;
         }

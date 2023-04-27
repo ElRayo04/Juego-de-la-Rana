@@ -132,18 +132,15 @@ public class PlayerControllerEdu : MonoBehaviour
 
             if (Vector3.Distance(positionEnemy, this.gameObject.transform.position) < 0.3f) //this.gameObject hace referencia a el gameobject que lleve este Script
             {
-                Debug.Log("AAAAAAAA me caigo");
+                //Debug.Log("AAAAAAAA me caigo");
                 goingToTheEnemy = false;                
             }
-            Debug.Log("si 2dos cosita");
-            Debug.Log("si una cosita");
         }
 
         //Girar el sprite del jugador según su dirección de movimiento
         //Si el jugador se mueve hacia la izquierda
         if (theRB.velocity.x > 0)
-        {
-            Debug.Log("si una cosita");
+        {            
             //No cambiamos la dirección del sprite
             theSR.flipX = false;
             //El jugador mira a la izquierda
@@ -151,8 +148,7 @@ public class PlayerControllerEdu : MonoBehaviour
         }
         //Si el jugador por el contrario se está moviendo hacia la derecha
         else if (theRB.velocity.x < 0)
-        {
-            Debug.Log("si 2dos cosita");
+        {            
             //Cambiamos la dirección del sprite
             theSR.flipX = true;
             //El jugador mira a la derecha

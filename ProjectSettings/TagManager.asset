@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -40,4 +41,28 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Farbackground
+    uniqueID: 4291905007
+    locked: 0
+  - name: MiddleBackground
+    uniqueID: 3789541
+    locked: 0
+  - name: Level
+    uniqueID: 1033938519
+    locked: 0
+  - name: Effects
+    uniqueID: 510875805
+    locked: 0
+  - name: Enemy
+    uniqueID: 4134165197
+    locked: 0
+  - name: Player
+    uniqueID: 4130993013
+    locked: 0
+  - name: Pickups
+    uniqueID: 2779316807
+    locked: 0
+  - name: DELANTE
+    uniqueID: 206515707
     locked: 0
