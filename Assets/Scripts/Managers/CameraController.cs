@@ -7,8 +7,8 @@ public class CameraController : MonoBehaviour
     //Para obtener la posición del objetivo de la cámara
     public Transform target;
 
-    ////Referencias a las posiciones de los fondos
-    //public Transform farBackground, middleBackground;
+    //Referencias a las posiciones de los fondos
+    public Transform farBackground, middleBackground;
     //Variables para posición mínima y máxima en vertical de la cámara
     public float minHeight, maxHeight;
 
@@ -40,14 +40,14 @@ public class CameraController : MonoBehaviour
         transform.position = new Vector3(target.position.x, Mathf.Clamp(target.position.y, minHeight, maxHeight), transform.position.z);
 
 
-        ////Variable que me permite conocer cuanto hay que moverse en X
-        ////float amountToMoveX = transform.position.x - lastXPos;
-        //Vector2 amountToMove = new Vector2(transform.position.x - lastPos.x, transform.position.y - lastPos.y);
+        //Variable que me permite conocer cuanto hay que moverse en X
+        //float amountToMoveX = transform.position.x - lastXPos;
+        Vector2 amountToMove = new Vector2(transform.position.x - lastPos.x, transform.position.y - lastPos.y);
 
-        ////farBackground.position = farBackground.position + new Vector3(amountToMoveX, 0f, 0f);
-        //farBackground.position = farBackground.position + new Vector3(amountToMove.x, amountToMove.y, 0f);
-        ////middleBackground.position += new Vector3(amountToMoveX * .5f, 0f, 0f);
-        //middleBackground.position += new Vector3(amountToMove.x, amountToMove.y, 0f) * .5f;
+        //farBackground.position = farBackground.position + new Vector3(amountToMoveX, 0f, 0f);
+        farBackground.position = farBackground.position + new Vector3(amountToMove.x, amountToMove.y, 0f);
+        //middleBackground.position += new Vector3(amountToMoveX * .5f, 0f, 0f);
+        middleBackground.position += new Vector3(amountToMove.x, amountToMove.y, 0f) * .5f;
 
         //lastXPos = transform.position.x;
         lastPos = transform.position;
