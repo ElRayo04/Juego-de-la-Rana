@@ -195,4 +195,26 @@ public class PlayerControllerEdu : MonoBehaviour
 
         this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, positionEnemy, frogStep);
     }
+
+    //Método para conocer cuando un objeto entra entra en colisión con el jugador
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Si el que colisiona contra el jugador es una plataforma
+        if (collision.gameObject.tag == "Platform")
+        {
+            //El jugador pasa a ser hijo de la plataforma
+            transform.parent = collision.transform;
+        }
+    }
+
+    //Método para conocer cuando dejamos de colisionar contra un objeto
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        //Si el objeto con el que dejamos de colisionar es una plataforma
+        if (collision.gameObject.tag == "Platform")
+        {
+            //El jugador deja de tener padre
+            transform.parent = null;
+        }
+    }
 }

@@ -526,7 +526,7 @@ GameObject:
   - component: {fileID: 342803677}
   m_Layer: 6
   m_Name: Platform prue recotada (1)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1198,7 +1198,7 @@ GameObject:
   - component: {fileID: 956181971}
   m_Layer: 6
   m_Name: Platform prue recotada
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3274,7 +3274,7 @@ GameObject:
   - component: {fileID: 2098500923}
   m_Layer: 0
   m_Name: enemigo aereo (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

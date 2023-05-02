@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; //Para cambiar entre escenas
 
 public class LevelManager : MonoBehaviour
 {
     //Tiempo antes de respawnear
     public float waitToRespawn;
 
-    ////Variable para guardar el nombre del nivel al que queremos ir
-    //public string levelToLoad;
+    //Variable para guardar el nombre del nivel al que queremos ir
+    public string levelToLoad;
 
     //Hacemos el Singleton de este script
     public static LevelManager sharedInstance;
