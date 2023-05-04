@@ -6,10 +6,13 @@ using UnityEngine.SceneManagement; //Para cambiar entre escenas
 public class MainMenu : MonoBehaviour
 {
     //Variable para saber la escena a la que queremos ir al principio o al continuar el juego
-    public string startScene, continueScene, optionsScene, mainMenuScene;
+    public string startScene, optionsScene, mainMenuScene;
 
     ////Referencia al botón de Continuar
     //public GameObject continueButton;
+
+    //Referencia al script de FaceBlack
+    public PanelFadeBlack fadeScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +35,7 @@ public class MainMenu : MonoBehaviour
     //Método para el Botón de Start
     public void StartButton()
     {
-        SceneManager.LoadScene(startScene);
+        fadeScreen.StartFade("SampleScene");
     }
 
     //Método para el Botón Quit
@@ -47,7 +50,7 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(optionsScene);
     }
-        public void Volver()
+    public void Volver()
     {
         SceneManager.LoadScene(mainMenuScene);
     }
