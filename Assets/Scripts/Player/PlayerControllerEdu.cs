@@ -60,6 +60,8 @@ public class PlayerControllerEdu : MonoBehaviour
 
     //Variable para conocer hacia donde mira el jugador
     public bool isLeft;
+    //Variable para saber cuando el jugador puede interactuar con los objetos
+    public bool canInteract = false;
 
     //Hacemos el Singleton de este script
     public static PlayerControllerEdu sharedInstance;
@@ -194,6 +196,15 @@ public class PlayerControllerEdu : MonoBehaviour
         float frogStep = frogGoingToTargetSpeed * Time.deltaTime;
 
         this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, positionEnemy, frogStep);
+    }
+
+    //Método para que el jugador rebote 
+    public void Bounce(float bounceForce)
+    {
+        //Impulsamos al jugador rebotando
+        theRB.velocity = new Vector2(theRB.velocity.x, bounceForce);
+        ////Llamamos al sonido de saltar
+        //AudioManager.sharedInstance.PlaySFX(10);
     }
 
     //Método para conocer cuando un objeto entra entra en colisión con el jugador
