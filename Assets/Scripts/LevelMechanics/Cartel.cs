@@ -16,18 +16,20 @@ public class Cartel : MonoBehaviour
     {
         //Inicializamos el Sprite Renderer del interruptor
         theSR = GetComponent<SpriteRenderer>();
+        //
+        isTextPanelOpen = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         //Si pulsamos el botón E y el jugador puede interactuar
-        if (Input.GetKeyDown(KeyCode.F) && PlayerControllerEdu.sharedInstance.canInteract)
+        if (Input.GetKeyDown(KeyCode.F) && PlayerControllerEdu.sharedInstance.canInteract && isTextPanelOpen == false)
         {
             textPanel.SetActive(true);
             isTextPanelOpen = true;
         }
-        else if (isTextPanelOpen && (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Space)))
+        else if (isTextPanelOpen && (Input.GetKeyDown(KeyCode.F)))
         {
             textPanel.SetActive(false);
             isTextPanelOpen = false;
@@ -53,6 +55,9 @@ public class Cartel : MonoBehaviour
     {
         //Ocultamos el panel de información
         infoPanel.SetActive(false);
+        //
+        textPanel.SetActive(false);
+        isTextPanelOpen = false;
         //No permitimos al jugador que pueda interactuar con el objeto
         PlayerControllerEdu.sharedInstance.canInteract = false;
     }
