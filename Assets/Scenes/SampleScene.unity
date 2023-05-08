@@ -1453,7 +1453,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &370650328
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1494,6 +1494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seePlayer: 0
   target: {fileID: 0}
+  bounceForce: 20
 --- !u!4 &370650330
 Transform:
   m_ObjectHideFlags: 0
