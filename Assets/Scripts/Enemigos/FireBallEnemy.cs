@@ -6,19 +6,20 @@ public class FireBallEnemy : MonoBehaviour
 {
     //variable para saber si esta viendo al jugador
     public bool seePlayer;
-    public Transform target;
+    public bool imAtacking;
+    public bool atack;
 
     private Rigidbody2D theRB;    
-    private float push = 100f;
-    //Fuerza de empuje del Bouncer
-    public float bounceForce = 20f;
+    public float push = 1f;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         seePlayer = false;
+        imAtacking = false;
         //Inicializamos el rigidbody
-        theRB = gameObject.AddComponent<Rigidbody2D>();
+        theRB = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -30,22 +31,30 @@ public class FireBallEnemy : MonoBehaviour
     {
         //// Alternatively, specify the force mode, which is ForceMode2D.Force by default
         //theRB.AddForce(transform.up * push, ForceMode2D.Impulse);
-        if (seePlayer == true)
+        if (seePlayer == true && imAtacking == false)
         {
-            Bounce(bounceForce);
+            atack = true;
+            StartCoroutine(AtackPlayer());
         }
     }
 
     private void AceleronIzquierdo()
     {
         // Alternatively, specify the force mode, which is ForceMode2D.Force by default
-        theRB.AddForce(-transform.forward * push, ForceMode2D.Impulse);
+        theRB.AddForce(new Vector2(-1,0) * push, ForceMode2D.Impulse);
+        imAtacking = true;
+        Debug.Log("se activa AceleronIzquierdo ");
     }
 
-    public void Bounce(float bounceForce)
+    //Corruutina 
+    public IEnumerator AtackPlayer()
     {
-        //Impulsamos al jugador rebotando
-        theRB.velocity = new Vector2(theRB.velocity.x, bounceForce);
+        if(atack == true)
+        {
+            yield return new WaitForSeconds(1f);
+            AceleronIzquierdo();
+            atack = false;
+        }
     }
-
+   
 }
