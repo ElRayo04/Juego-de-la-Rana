@@ -27,7 +27,7 @@ public class Pickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(isFruitMaxHealth)
+        if(isFruitMaxHealth && collision.CompareTag("Player"))
         {
             //El objeto ha sido recogido
             isCollected = true;

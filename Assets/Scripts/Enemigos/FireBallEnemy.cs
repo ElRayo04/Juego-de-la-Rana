@@ -8,6 +8,7 @@ public class FireBallEnemy : MonoBehaviour
     public bool seePlayer;
     public bool imAtacking;
     public bool atack;
+    public Transform target;
 
     private Rigidbody2D theRB;    
     public float push = 1f;
@@ -35,13 +36,16 @@ public class FireBallEnemy : MonoBehaviour
         {
             atack = true;
             StartCoroutine(AtackPlayer());
+            atack = false;
         }
+
+
     }
 
-    private void AceleronIzquierdo()
+    private void Aceleron(int sign)
     {
         // Alternatively, specify the force mode, which is ForceMode2D.Force by default
-        theRB.AddForce(new Vector2(-1,0) * push, ForceMode2D.Impulse);
+        theRB.AddForce(new Vector2(1,0) * push* sign, ForceMode2D.Impulse);
         imAtacking = true;
         Debug.Log("se activa AceleronIzquierdo ");
     }
@@ -49,12 +53,28 @@ public class FireBallEnemy : MonoBehaviour
     //Corruutina 
     public IEnumerator AtackPlayer()
     {
-        if(atack == true)
+        //if(atack == true)
+        //{
+        yield return new WaitForSeconds(1f);
+        //Si el jugador esta a la izquierda, atacamois hacia la izquierda
+        if (target.position.x < this.gameObject.transform.position.x)
         {
-            yield return new WaitForSeconds(1f);
-            AceleronIzquierdo();
-            atack = false;
+            Aceleron(-1);
+
         }
+        else // en su defecto esta en la derecha, atacamos a la derecha.
+        {
+            Aceleron(1);
+
+        }
+        yield return new WaitForSeconds(0.5f);
+        theRB.AddForce(theRB.velocity * -1, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(1f);
+        imAtacking = false;
+
+
+        //}
     }
    
 }
