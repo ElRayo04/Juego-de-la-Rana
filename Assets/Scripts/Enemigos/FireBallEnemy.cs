@@ -38,8 +38,6 @@ public class FireBallEnemy : MonoBehaviour
             StartCoroutine(AtackPlayer());
             atack = false;
         }
-
-
     }
 
     private void Aceleron(int sign)
@@ -60,20 +58,16 @@ public class FireBallEnemy : MonoBehaviour
         if (target.position.x < this.gameObject.transform.position.x)
         {
             Aceleron(-1);
-
         }
         else // en su defecto esta en la derecha, atacamos a la derecha.
         {
             Aceleron(1);
-
         }
         yield return new WaitForSeconds(0.5f);
         theRB.AddForce(theRB.velocity * -1, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(1f);
         imAtacking = false;
-
-
         //}
     }
    

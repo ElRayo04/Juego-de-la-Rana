@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VisionRange : MonoBehaviour
+public class VisionRangeBeeTaladro : MonoBehaviour
 {
-    public GameObject fireBallEnemy;
+    public GameObject enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -17,16 +17,13 @@ public class VisionRange : MonoBehaviour
     {
         
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))fireBallEnemy.GetComponent<FireBallEnemy>().seePlayer = true;
+        if (collision.gameObject.CompareTag("Player")) enemy.GetComponent<AbejaPinchoController>().seePlayer = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player")) fireBallEnemy.GetComponent<FireBallEnemy>().seePlayer = false;
+        if (collision.gameObject.CompareTag("Player")) enemy.GetComponent<AbejaPinchoController>().seePlayer = false;
     }
-
-
 }

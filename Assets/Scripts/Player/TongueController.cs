@@ -65,11 +65,8 @@ public class TongueController : MonoBehaviour
         {
             //Guardamos la posicion del enemigo --> variable que se actualiza cuando chocamos con un enemigo
             player.positionEnemy = collision.transform.position;
-            player.goingToTheEnemy = true;
-
-          
-        }
-        
+            player.goingToTheEnemy = true;          
+        }        
     }
 
     

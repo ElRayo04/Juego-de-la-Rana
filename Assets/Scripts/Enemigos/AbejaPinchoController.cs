@@ -4,36 +4,64 @@ using UnityEngine;
 
 public class AbejaPinchoController : MonoBehaviour
 {
+    //Sin atacar
     //Array de puntos por los que se mueve el enemigo
-    public Transform[] points;
-    //Velocidad de movimiento del enemigo
-    public float moveSpeed;
+    public Transform[] points;    
     //Variable para conocer en que punto del recorrido se encuentra el enemigo
     public int currentPoint;
+    //Velocidad de movimiento del enemigo
+    public float moveSpeed;
 
-    //Una referencia al SpriteRenderer del enemigo
+    //Variables para el ataque    
+    public Transform target;
+    public bool seePlayer;
+    public bool goingToFrog;
+    public float speedAtack;
+    // Evita que la coorrutina ejecute 800 veces
+    public bool hasStartedChasing;
+
+    //Una referencia al SpriteRenderer y al Rigidbody del enemigo
     private SpriteRenderer theSR;
-
-    //Distancia del jugador para ser atacado, velocidad de persecución
-    public float distanceToAttackPlayer, chaseSpeed;
-
-    //Objetivo del enemigo
-    private Vector3 attackTarget;
-
-    //Tiempo entre ataques
-    public float waitAfterAttack;
-    //Contador de tiempo entre ataques
-    private float attackCounter;
+    private Rigidbody2D theRB;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        seePlayer = false;
+        goingToFrog = false;
+        //Inicializamos el rigidbody
+        theRB = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(seePlayer == true && goingToFrog )
+        {
+           AtaqueTaladro();
+        }
         
+        if(seePlayer== true && hasStartedChasing == false)
+        {
+            StartCoroutine(AtackSecuence());
+        }
+    }
+
+    public void AtaqueTaladro()
+    {
+        float beeStep = speedAtack * Time.deltaTime;
+        // Movemos el enemigo hacia el jugador
+        this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position,target.position, beeStep); ;
+    }
+
+    //Corruutina 
+    public IEnumerator AtackSecuence()
+    {
+        goingToFrog = true;
+        yield return new WaitForSeconds(1f);
+        goingToFrog = false;
+        yield return new WaitForSeconds(0.5f);
+
+        hasStartedChasing = false;
     }
 }
