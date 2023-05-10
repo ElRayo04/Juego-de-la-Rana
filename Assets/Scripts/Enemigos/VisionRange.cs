@@ -22,4 +22,11 @@ public class VisionRange : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))fireBallEnemy.GetComponent<FireBallEnemy>().seePlayer = true;
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player")) fireBallEnemy.GetComponent<FireBallEnemy>().seePlayer = false;
+    }
+
+
 }
