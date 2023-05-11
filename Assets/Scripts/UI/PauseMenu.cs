@@ -24,6 +24,7 @@ public class PauseMenu : MonoBehaviour
         //Si pulsamos el botón de Intro
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            Debug.Log("YEAH");
             //Pausamos el juego
             PauseUnpause();
         }
