@@ -38,12 +38,34 @@ public class AbejaPinchoController : MonoBehaviour
     {
         if(seePlayer == true && goingToFrog )
         {
-           AtaqueTaladro();
+           
+            if(goingToFrog)
+            {
+                AtaqueTaladro();
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
         }
         
         if(seePlayer== true && hasStartedChasing == false)
         {
             StartCoroutine(AtackSecuence());
+            hasStartedChasing = true;
+        }        
+
+        //Si el enemigo ha llegado al punto más a la izquierda
+        if (transform.position.x < points[currentPoint].position.x)
+        {
+            //Rotamos al enemigo para que mire en dirección contraria
+            theSR.flipX = true;
+        }
+        //Si el enemigo ha llegado al punto más a la derecha
+        else if (transform.position.x > points[currentPoint].position.x)
+        {
+            //Dejamos al enemigo mirando a donde estaba
+            theSR.flipX = false;
         }
     }
 
@@ -57,10 +79,11 @@ public class AbejaPinchoController : MonoBehaviour
     //Corruutina 
     public IEnumerator AtackSecuence()
     {
+        yield return new WaitForSeconds(1f);
         goingToFrog = true;
         yield return new WaitForSeconds(1f);
         goingToFrog = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         hasStartedChasing = false;
     }

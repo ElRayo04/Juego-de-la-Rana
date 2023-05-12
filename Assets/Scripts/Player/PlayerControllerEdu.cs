@@ -63,6 +63,10 @@ public class PlayerControllerEdu : MonoBehaviour
     //Variable para saber cuando el jugador puede interactuar con los objetos
     public bool canInteract = false;
 
+    //Variables para el contador de tiempo del KnockBack
+    public float knockBackLength, knockBackForce; //Valor que tendrá el contador de KnockBack, y la fuerza de KnockBack
+    private float knockBackCounter; //Contador de KnockBack
+
     //Hacemos el Singleton de este script
     public static PlayerControllerEdu sharedInstance;
 
@@ -86,76 +90,99 @@ public class PlayerControllerEdu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //
-        theRB.velocity = new Vector2(moveSpeed * Input.GetAxis("Horizontal"), theRB.velocity.y);
-
-        if (hasJumpEnded)
+        //Si el contador de KnockBack se ha vaciado, el jugador recupera el control del movimiento
+        if (knockBackCounter <= 0)
         {
-            isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, 0.2f, whatIsGround);
-        }
-        else
-        {
-            isGrounded = false;
-        }
+            //
+            theRB.velocity = new Vector2(moveSpeed * Input.GetAxis("Horizontal"), theRB.velocity.y);
+
+            if (hasJumpEnded)
+            {
+                isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, 0.2f, whatIsGround);
+            }
+            else
+            {
+                isGrounded = false;
+            }
 
 
-        if (isGrounded)
-        {
-            duringJump = false;
-            ySpeed = 0;
-        }
-
-        if (Input.GetButtonDown("Jump"))
-        {
             if (isGrounded)
             {
-                //theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
-                Startjump();
+                duringJump = false;
+                ySpeed = 0;
             }
-        }
 
-        if (!hasJumpEnded)
-        {
-            jump();
-        }
-        else if (!isGrounded && duringJump)
-        {
-            ySpeed = Mathf.Lerp(ySpeed, fallMaxSpeed, fallAccel);
-            theRB.velocity = new Vector2(theRB.velocity.x, ySpeed);
-        }
-
-        //Llamamos al metodo para ir hacia la lengua
-        if (goingToTheEnemy == true)
-        {
-            MoveFrogTowards();
-
-            //Desactivamos el collider de la lengua
-            tongueCollider.enabled = false;  // .enable sirbe para desactivar componestes
-
-            if (Vector3.Distance(positionEnemy, this.gameObject.transform.position) < 0.3f) //this.gameObject hace referencia a el gameobject que lleve este Script
+            if (Input.GetButtonDown("Jump"))
             {
-                //Debug.Log("AAAAAAAA me caigo");
-                goingToTheEnemy = false;                
+                if (isGrounded)
+                {
+                    //theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+                    Startjump();
+                }
+            }
+
+            if (!hasJumpEnded)
+            {
+                jump();
+            }
+            else if (!isGrounded && duringJump)
+            {
+                ySpeed = Mathf.Lerp(ySpeed, fallMaxSpeed, fallAccel);
+                theRB.velocity = new Vector2(theRB.velocity.x, ySpeed);
+            }
+
+            //Llamamos al metodo para ir hacia la lengua
+            if (goingToTheEnemy == true)
+            {
+                MoveFrogTowards();
+
+                //Desactivamos el collider de la lengua
+                tongueCollider.enabled = false;  // .enable sirbe para desactivar componestes
+
+                if (Vector3.Distance(positionEnemy, this.gameObject.transform.position) < 0.3f) //this.gameObject hace referencia a el gameobject que lleve este Script
+                {
+                    //Debug.Log("AAAAAAAA me caigo");
+                    goingToTheEnemy = false;
+                }
+            }
+
+            //Girar el sprite del jugador según su dirección de movimiento
+            //Si el jugador se mueve hacia la izquierda
+            if (theRB.velocity.x > 0)
+            {
+                //No cambiamos la dirección del sprite
+                theSR.flipX = false;
+                //El jugador mira a la izquierda
+                isLeft = true;
+            }
+            //Si el jugador por el contrario se está moviendo hacia la derecha
+            else if (theRB.velocity.x < 0)
+            {
+                //Cambiamos la dirección del sprite
+                theSR.flipX = true;
+                //El jugador mira a la derecha
+                isLeft = false;
+            }
+        }
+        //Si el contador de KnockBack todavía no está vacío
+        else
+        {
+            //Hacemos decrecer el contador en 1 cada segundo
+            knockBackCounter -= Time.deltaTime;
+            //Si el jugador mira a la izquierda
+            if (!theSR.flipX)
+            {
+                //Aplicamos un pequeño empuje a la derecha
+                theRB.velocity = new Vector2(-knockBackForce, theRB.velocity.y);
+            }
+            //Si el jugador mira a la derecha
+            else
+            {
+                //Aplicamos un pequeño empuje a la izquierda
+                theRB.velocity = new Vector2(knockBackForce, theRB.velocity.y);
             }
         }
 
-        //Girar el sprite del jugador según su dirección de movimiento
-        //Si el jugador se mueve hacia la izquierda
-        if (theRB.velocity.x > 0)
-        {            
-            //No cambiamos la dirección del sprite
-            theSR.flipX = false;
-            //El jugador mira a la izquierda
-            isLeft = true;
-        }
-        //Si el jugador por el contrario se está moviendo hacia la derecha
-        else if (theRB.velocity.x < 0)
-        {            
-            //Cambiamos la dirección del sprite
-            theSR.flipX = true;
-            //El jugador mira a la derecha
-            isLeft = false;
-        }
     }
 
     private void Startjump()
@@ -196,6 +223,15 @@ public class PlayerControllerEdu : MonoBehaviour
         float frogStep = frogGoingToTargetSpeed * Time.deltaTime;
 
         this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, positionEnemy, frogStep);
+    }
+
+    //Método para gestionar el KnockBack producido al jugador al hacerse daño
+    public void KnockBack()
+    {
+        //Inicializar el contador de KnockBack
+        knockBackCounter = knockBackLength;
+        //Paralizamos en X al jugador y hacemos que salte en Y
+        theRB.velocity = new Vector2(0f, knockBackForce);        
     }
 
     //Método para que el jugador rebote 

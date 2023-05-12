@@ -90,7 +90,7 @@ public class PlayerHealthController : MonoBehaviour
                 theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, .5f);
 
                 //Llamamos al método que hace que el jugador realice el KnockBack
-                //PlayerController.sharedInstance.KnockBack();              
+                PlayerControllerEdu.sharedInstance.KnockBack();              
             }
 
             //Actualizamos la UI
