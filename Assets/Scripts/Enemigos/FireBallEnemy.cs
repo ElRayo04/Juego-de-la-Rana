@@ -10,9 +10,12 @@ public class FireBallEnemy : MonoBehaviour
     public bool atack;
     public Transform target;
 
-    private Rigidbody2D theRB;    
+    private Rigidbody2D theRB;
+    public SpriteRenderer theSR;
     public float push = 1f;
-    
+    //Variable para conocer la dirección de movimiento del enemigo
+    private bool movingRight;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +41,9 @@ public class FireBallEnemy : MonoBehaviour
             StartCoroutine(AtackPlayer());
             atack = false;
         }
+
+        if(movingRight == true) { theSR.flipX = true; }
+        else { theSR.flipX = false; }
     }
 
     private void Aceleron(int sign)
@@ -57,11 +63,13 @@ public class FireBallEnemy : MonoBehaviour
         //Si el jugador esta a la izquierda, atacamois hacia la izquierda
         if (target.position.x < this.gameObject.transform.position.x)
         {
+            movingRight = false;
             Aceleron(-1);
         }
         else // en su defecto esta en la derecha, atacamos a la derecha.
         {
-            Aceleron(1);
+            movingRight = true;
+            Aceleron(1);            
         }
         yield return new WaitForSeconds(0.5f);
         theRB.AddForce(theRB.velocity * -1, ForceMode2D.Impulse);
