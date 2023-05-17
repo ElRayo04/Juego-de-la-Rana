@@ -55,18 +55,18 @@ public class AbejaPinchoController : MonoBehaviour
             hasStartedChasing = true;
         }        
 
-        //Si el enemigo ha llegado al punto más a la izquierda
-        if (transform.position.x < points[currentPoint].position.x)
-        {
-            //Rotamos al enemigo para que mire en dirección contraria
-            theSR.flipX = true;
-        }
-        //Si el enemigo ha llegado al punto más a la derecha
-        else if (transform.position.x > points[currentPoint].position.x)
-        {
-            //Dejamos al enemigo mirando a donde estaba
-            theSR.flipX = false;
-        }
+        ////Si el enemigo ha llegado al punto más a la izquierda
+        //if (transform.position.x < points[currentPoint].position.x)
+        //{
+        //    //Rotamos al enemigo para que mire en dirección contraria
+        //    theSR.flipX = true;
+        //}
+        ////Si el enemigo ha llegado al punto más a la derecha
+        //else if (transform.position.x > points[currentPoint].position.x)
+        //{
+        //    //Dejamos al enemigo mirando a donde estaba
+        //    theSR.flipX = false;
+        //}
     }
 
     public void AtaqueTaladro()
